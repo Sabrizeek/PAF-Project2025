@@ -112,16 +112,3 @@
   100% { transform: scale(1); }
 }
 
-@media (max-width: 768px) {
-  .nav_con {
-    padding: 0 1rem;
-  }
-
-  .nav_bar_item {
-    gap: 20px;
-  }
-
-  .brand-name {
-    font-size: 24px;
-  }
-
