@@ -87,7 +87,6 @@ const Home = () => {
                     { title: "Humidity", value: "60%", image: "humidity.jpg" },
                     { title: "Soil Moisture", value: "45%", image: "soil-moisture.jpg" },
                     { title: "CO₂ Level", value: "880 ppm", image: "co2-level.png" },
-                    { title: "LUX", value: "######", image: "lux.jpg" },
                     { title: "Electrical Conductivity", value: "######", image: "electrical-conductivity.jpg" },
                     { title: "Level", value: "N=20%, P=40%, K=60%", image: "level.png" },
                     { title: "O₂ Level", value: "16%", image: "o2-level.jpg" }].map((card, index) => (
