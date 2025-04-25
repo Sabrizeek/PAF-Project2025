@@ -5,7 +5,7 @@ const Footer = () => {
   return (
     <footer className="footer">
       <div className="text-center py-3">
-        Copyright © 2024 SANOTA(pvt)Ltd. All rights reserved.
+        Copyright © Wathsalavi. All rights reserved.
       </div>
     </footer>
   );
