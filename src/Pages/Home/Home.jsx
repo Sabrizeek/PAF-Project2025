@@ -83,13 +83,13 @@ const Home = () => {
 
                 <div className="dashboard-cards row g-3 mt-3">
                   {/* Cards for every experience with additional booster messages */}
-                  {[{ title: "Content Delivery", value: "Uncover Secrets...", image: "temperature.jpg" },
-                    { title: "Learning", value: "Level Up...", image: "humidity.jpg" },
-                    { title: "Posts", value: "Hot Take...", image: "soil-moisture.jpg" },
-                    { title: "Learning Plans", value: "Smart Growth...", image: "co2-level.png" },
-                    { title: "Notifications", value: "Don’t Miss...", image: "co2-level.png" }, 
-                    { title: "Achievement Process", value: "Elite Progress...", image: "electrical-conductivity.jpg" },
-                    { title: "User EXperience", value: "Effortless Joy...", image: "o2-level.jpg" }].map((card, index) => (
+                  {[{ title: "Content Delivery", value: "Uncover Secrets...", image: "lux.jpg" },
+                    { title: "Learning", value: "Level Up...", image: "lux.jpg" },
+                    { title: "Posts", value: "Hot Take...", image: "lux.jpg" },
+                    { title: "Learning Plans", value: "Smart Growth...", image: "lux.jpg" },
+                    { title: "Notifications", value: "Don’t Miss...", image: "lux.jpg" }, 
+                    { title: "Achievement Process", value: "Elite Progress...", image: "lux.jpg" },
+                    { title: "User EXperience", value: "Effortless Joy...", image: "lux.jpg" }].map((card, index) => (
                     <div className="col-md-3" key={index}>
                       <div className="card h-100 shadow-sm text-center">
                         <img
