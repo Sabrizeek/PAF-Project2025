@@ -36,6 +36,10 @@ const Sidebar = () => {
       </NavLink>
 
       {/* Report Link */}
+      <NavLink to="/acheievements" className="sidebar-item" activeClassName="active">
+        <i className="bi bi-diamond-fill sidebar-icon"></i> Acheivement Process
+      </NavLink>
+
       <NavLink to="/report" className="sidebar-item" activeClassName="active">
         <i className="bi bi-diamond-fill sidebar-icon"></i> Report
       </NavLink>
