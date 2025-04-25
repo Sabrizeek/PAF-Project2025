@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { FaEnvelope, FaPhone, FaTools } from 'react-icons/fa';
 import './UserProfile.css'
 import Pro from './img/img.png';
-import NavBar from '../../Components/NavBar/NavBar';
+
 export const fetchUserDetails = async (userId) => {
     try {
         const response = await fetch(`http://localhost:8080/user/${userId}`);
@@ -67,7 +67,7 @@ function GoogalUserPro() {
     return (
         <div>
             <div className='continer'>
-                <NavBar />
+               
                 <div className='continSection'>
                     {userData && userData.id === localStorage.getItem('userID') && (
                         <div className="profile-card">

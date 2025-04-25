@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FaEnvelope, FaPhone, FaTools } from 'react-icons/fa';
 import './UserProfile.css'
-import NavBar from '../../Components/NavBar/NavBar';
+
 export const fetchUserDetails = async (userId) => {
     try {
         const response = await fetch(`http://localhost:8080/user/${userId}`);
@@ -51,7 +51,7 @@ function UserProfile() {
     return (
         <div>
             <div className='continer'>
-                <NavBar />
+              
                 <div className='continSection'>
                     <div className="profile-navigation">
                         <button className="nav-button" onClick={() => window.location.href = '/myLearningPlan'}>

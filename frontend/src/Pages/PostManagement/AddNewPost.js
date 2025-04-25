@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import NavBar from '../../Components/NavBar/NavBar';
+
 function AddNewPost() {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
@@ -88,7 +88,7 @@ function AddNewPost() {
   return (
     <div>
       <div className='continer'>
-        <NavBar />
+       
         <div className='continSection'>
           <div className="from_continer">
             <p className="Auth_heading">Create New Post</p>
