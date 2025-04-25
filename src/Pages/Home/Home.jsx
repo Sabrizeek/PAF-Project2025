@@ -83,7 +83,7 @@ const Home = () => {
 
                 <div className="dashboard-cards row g-3 mt-3">
                   {/* Cards for Tunnel 01 */}
-                  {[{ title: "Content Delivery", value: "", image: "temperature.jpg" },
+                  {[{ title: "Content Delivery", value: "Uncover Secrets...", image: "temperature.jpg" },
                     { title: "Learning", value: "", image: "humidity.jpg" },
                     { title: "Posts", value: "", image: "soil-moisture.jpg" },
                     { title: "Learning Plans", value: "", image: "co2-level.png" },
