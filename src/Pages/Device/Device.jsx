@@ -13,7 +13,13 @@ const notifications = [
     daysAgo: '4 days ago',
     image: '/assets/avatar.png'
   },
- 
+  {
+    id: 2,
+    name: 'John Dwayer',
+    action: 'liked your post',
+    daysAgo: '3 days ago',
+    image: '/assets/avatar.png'
+  },
 ];
 
 const Device = () => {
