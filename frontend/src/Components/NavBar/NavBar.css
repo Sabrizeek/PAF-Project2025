@@ -130,12 +130,3 @@
   }
 }
 
-@media (max-width: 640px) {
-  .nav_nav_item span {
-    display: none;
-  }
-  
-  .nav_bar_item {
-    gap: 16px;
-  }
-}
