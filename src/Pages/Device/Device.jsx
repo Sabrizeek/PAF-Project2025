@@ -20,6 +20,13 @@ const notifications = [
     daysAgo: '3 days ago',
     image: '/assets/avatar.png'
   },
+  {
+    id: 3,
+    name: 'Tim Trollen',
+    action: 'commented on your post',
+    daysAgo: '1 days ago',
+    image: '/assets/avatar.png'
+  }
 ];
 
 const Device = () => {
