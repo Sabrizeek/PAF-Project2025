@@ -20,6 +20,10 @@ const Sidebar = () => {
         <i className="bi bi-diamond-fill sidebar-icon"></i> Learning
       </NavLink>
 
+    {/* Report Link */}
+    <NavLink to="/posts" className="sidebar-item" activeClassName="active">
+        <i className="bi bi-diamond-fill sidebar-icon"></i> Posts
+      </NavLink>
 
       {/* Add Device Link */}
       <NavLink to="/device" className="sidebar-item" activeClassName="active">
