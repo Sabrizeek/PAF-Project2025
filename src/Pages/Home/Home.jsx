@@ -86,7 +86,7 @@ const Home = () => {
                   {[{ title: "Content Delivery", value: "", image: "temperature.jpg" },
                     { title: "Learning", value: "", image: "humidity.jpg" },
                     { title: "Posts", value: "", image: "soil-moisture.jpg" },
-                    { title: "CO₂ Level", value: "880 ppm", image: "co2-level.png" },
+                    { title: "Learning Plans", value: "", image: "co2-level.png" },
                     { title: "Electrical Conductivity", value: "######", image: "electrical-conductivity.jpg" },
                     { title: "Level", value: "N=20%, P=40%, K=60%", image: "level.png" },
                     { title: "O₂ Level", value: "16%", image: "o2-level.jpg" }].map((card, index) => (
