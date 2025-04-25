@@ -85,8 +85,8 @@ const Home = () => {
                   {/* Cards for Tunnel 01 */}
                   {[{ title: "Content Delivery", value: "Uncover Secrets...", image: "temperature.jpg" },
                     { title: "Learning", value: "Level Up...", image: "humidity.jpg" },
-                    { title: "Posts", value: "Hot Take", image: "soil-moisture.jpg" },
-                    { title: "Learning Plans", value: "", image: "co2-level.png" },
+                    { title: "Posts", value: "Hot Take...", image: "soil-moisture.jpg" },
+                    { title: "Learning Plans", value: "Smart Growth...", image: "co2-level.png" },
                     { title: "Achievement Process", value: "", image: "electrical-conductivity.jpg" },
                     { title: "User EXperience", value: "", image: "o2-level.jpg" }].map((card, index) => (
                     <div className="col-md-3" key={index}>
