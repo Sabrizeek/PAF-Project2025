@@ -1,0 +1,81 @@
+/* Topbar container styling */
+.topbar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: calc(100% - 250px); /* Adjust for Sidebar width */
+  height: 50px;
+  background-color: white;
+  display: flex;
+  justify-content: flex-end; /* Align icons to the right */
+  align-items: center; /* Center icons vertically */
+  padding: 0 20px;
+  z-index: 1100; /* Ensure it appears above Sidebar */
+}
+
+/* Icons container */
+.topbar-icons {
+  display: flex;
+  gap: 20px; /* Space between icons */
+  align-items: center; /* Keep icons aligned vertically */
+}
+
+/* User icon container (to position dropdown) */
+.user-container {
+  position: relative; /* Ensure dropdown is positioned relative to the user icon */
+}
+
+/* Icon styles */
+.icon {
+  font-size: 20px;
+  color: #333;
+  cursor: pointer;
+}
+
+/* Add hover effect for icons */
+.icon:hover {
+  color: #007bff; /* Change to blue on hover */
+}
+
+/* Bell icon customization */
+.bell {
+  color: #333;
+}
+
+/* User icon customization */
+.user {
+  color: #333;
+}
+
+/* Menu icon customization */
+.menu {
+  color: #333;
+}
+
+/* Dropdown menu for logout */
+.logout-dropdown {
+  position: absolute;
+  top: 40px; /* Below the user icon */
+  right: 0; /* Align with user icon */
+  background-color: white;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+  padding: 10px;
+  border-radius: 4px;
+  z-index: 1200;
+}
+
+/* Styling the logout button */
+.logout-button {
+  padding: 8px 15px;
+  background-color: white; /* White background */
+  color: #c41d1d; /* Red text */
+  border: 2px solid #c41d1d; 
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s; /* Smooth transition */
+}
+
+.logout-button:hover {
+  background-color: #c41d1d; /* Red background on hover */
+  color: white; /* White text on hover */
+}

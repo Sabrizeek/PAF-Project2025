@@ -1,0 +1,65 @@
+.login-container {
+    display: flex; /* Activate flexbox layout */
+    align-items: center; /* Center content vertically */
+    justify-content: center; /* Center content horizontally */
+    height: 100vh; /* Full screen height */
+    width: 100vw; /* Full screen width */
+    background-color: #ffffff; /* Background color */
+    margin: 0; /* Remove any default margins */
+  }
+  
+  .login-box {
+    width: 90%;
+    max-width: 1200px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    background: white;
+    padding: 3rem;
+  }
+  
+  
+  .tree-image {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  .login-form {
+    padding: 2rem;
+  }
+  
+  .forgot-password {
+    color: #000000;
+    text-decoration: none;
+  }
+  
+  .forgot-password:hover {
+    text-decoration: underline;
+  }
+  
+  /* Footer Styling */
+  .footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background-color: #626364;
+    border-top: 1px solid #ddd;
+  }
+  
+  .footer .text-center {
+    padding: 1rem;
+    font-size: 0.9rem;
+    color: #ffffff;
+  }
+  
+  /* Align "Don't have an account?" and the "Create New" button in one line */
+.d-flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ml-3 {
+  margin-left: 1rem;
+}
