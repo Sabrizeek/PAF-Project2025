@@ -87,7 +87,7 @@ const Home = () => {
                     { title: "Learning", value: "", image: "humidity.jpg" },
                     { title: "Posts", value: "", image: "soil-moisture.jpg" },
                     { title: "Learning Plans", value: "", image: "co2-level.png" },
-                    { title: "Electrical Conductivity", value: "######", image: "electrical-conductivity.jpg" },
+                    { title: "Achievement Process", value: "", image: "electrical-conductivity.jpg" },
                     { title: "Level", value: "N=20%, P=40%, K=60%", image: "level.png" },
                     { title: "O₂ Level", value: "16%", image: "o2-level.jpg" }].map((card, index) => (
                     <div className="col-md-3" key={index}>
