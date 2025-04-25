@@ -74,7 +74,7 @@ const Home = () => {
             <div className="dashboard-section">
               <div className="tunnel-container mb-4">
                 <div className="tunnel-header d-flex justify-content-between align-items-center bg-light p-3 rounded">
-                  <span className="fw-bold"></span>
+                  <span className="fw-bold">WELCOME!!</span>
                   <div>
                   
                     
