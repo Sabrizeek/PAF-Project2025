@@ -3,6 +3,8 @@ import Sidebar from '../../Component/Sidebar/Sidebar';
 import Topbar from '../../Component/Topbar/Topbar';
 import Footer from '../../Component/Footer/Footer';
 import './Device.css';
+import avatar from '../../assets/avatar.png';
+
 import { FaBellSlash, FaTrash } from 'react-icons/fa';
 
 const notifications = [
@@ -11,21 +13,21 @@ const notifications = [
     name: 'Brigid Dawson',
     action: 'followed you',
     daysAgo: '4 days ago',
-    image: '/assets/avatar.png'
+    image: avatar
   },
   {
     id: 2,
     name: 'John Dwayer',
     action: 'liked your post',
     daysAgo: '3 days ago',
-    image: '/assets/avatar.png'
+    image: avatar
   },
   {
     id: 3,
     name: 'Tim Trollen',
     action: 'commented on your post',
     daysAgo: '1 days ago',
-    image: '/assets/avatar.png'
+    image: avatar
   }
 ];
 
