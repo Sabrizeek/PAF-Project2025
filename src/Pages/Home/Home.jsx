@@ -70,7 +70,7 @@ const Home = () => {
         <div className="main-content ms-5">
           <Topbar />
           <div className="content-wrapper p-3">
-            <h1 className="dashboard-title text-center mb-4">Dashboard</h1>
+            <h1 className="dashboard-title text-center mb-4"></h1>
             <div className="dashboard-section">
               <div className="tunnel-container mb-4">
                 <div className="tunnel-header d-flex justify-content-between align-items-center bg-light p-3 rounded">
