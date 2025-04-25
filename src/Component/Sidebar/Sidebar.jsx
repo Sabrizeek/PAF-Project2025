@@ -30,9 +30,9 @@ const Sidebar = () => {
         <i className="bi bi-diamond-fill sidebar-icon"></i> Learning Plans
       </NavLink>
 
-      {/* Add Device Link */}
+      {/* Add notifications Link */}
       <NavLink to="/device" className="sidebar-item" activeClassName="active">
-        <i className="bi bi-diamond-fill sidebar-icon"></i> Add Device
+        <i className="bi bi-diamond-fill sidebar-icon"></i> Notifications
       </NavLink>
 
       {/* Report Link */}
