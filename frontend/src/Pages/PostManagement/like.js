@@ -95,26 +95,25 @@ function LikeComment() {
     }
   };
 
-  // Handle comment submission
+  // Handle comment submission (with added logging)
   const handleAddComment = async () => {
-    if (!loggedInUserID) {
-      alert('Please log in to comment.');
-      return;
-    }
-    if (!newComment.trim()) {
-      alert('Comment cannot be empty.');
-      return;
-    }
+    const payload = {
+      userID: loggedInUserID || 'anonymous',
+      targetID,
+      content: newComment || '',
+    };
+    console.log('Sending comment payload:', payload); // Log the payload being sent
     try {
-      const response = await axios.post('http://localhost:8080/api/interactions/comment', {
-        userID: loggedInUserID,
-        targetID,
-        content: newComment,
-      });
+      const response = await axios.post('http://localhost:8080/api/interactions/comment', payload);
+      console.log('Comment response:', response.data); // Log the response
       setComments((prevComments) => [...prevComments, response.data]);
       setNewComment('');
     } catch (error) {
-      console.error('Error adding comment:', error);
+      console.error('Error adding comment:', error); // Log any errors
+      if (error.response) {
+        console.error('Error response:', error.response.data); // Log response error details
+        console.error('Error status:', error.response.status);
+      }
     }
   };
 
