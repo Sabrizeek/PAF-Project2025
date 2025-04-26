@@ -4,7 +4,7 @@ import Topbar from '../../Component/Topbar/Topbar';
 import Footer from '../../Component/Footer/Footer';
 import './Device.css';
 import avatar from '../../assets/avatar.png';
-import { FaBell, FaTrash } from 'react-icons/fa'; // Use FaBell for this
+import { FaBell, FaTrash } from 'react-icons/fa';
 
 const initialNotifications = [
   {
@@ -59,7 +59,9 @@ const Device = () => {
                 className="notification-card"
                 key={notification.id}
                 style={{
-                  backgroundColor: notification.isActive ? '#ffe5e5' : 'white'
+                  backgroundColor: 'white', // always white
+                  border: notification.isActive ? '2px solid #b30000' : '1px solid #dee2e6', // 🔥 border changes
+                  transition: 'border 0.3s ease' // smooth border change
                 }}
               >
                 <div className="notification-avatar">
@@ -70,16 +72,15 @@ const Device = () => {
                   <div className="notification-time">{notification.daysAgo}</div>
                 </div>
                 <div className="notification-actions">
-                <FaBell
-                          className="icon-btn"
-                          title={notification.isActive ? "Unmark as Important" : "Mark as Important"} 
-                          onClick={() => handleCardBellClick(notification.id)}
-                          style={{
-                            color: notification.isActive ? 'red' : 'black',
-                            cursor: 'pointer'
-                          }}
-                        />
-
+                  <FaBell
+                    className="icon-btn"
+                    title={notification.isActive ? "Unmark as Read" : "Mark as Read"}
+                    onClick={() => handleCardBellClick(notification.id)}
+                    style={{
+                      color: notification.isActive ? 'red' : 'black',
+                      cursor: 'pointer'
+                    }}
+                  />
                   <FaTrash className="icon-btn" title="Delete" />
                 </div>
               </div>
