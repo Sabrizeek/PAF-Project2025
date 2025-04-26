@@ -13,7 +13,7 @@ const initialNotifications = [
     action: 'followed you',
     daysAgo: '4 days ago',
     image: avatar,
-    isActive: false
+    isActive: true // ❗ unread by default
   },
   {
     id: 2,
@@ -21,7 +21,7 @@ const initialNotifications = [
     action: 'liked your post',
     daysAgo: '3 days ago',
     image: avatar,
-    isActive: false
+    isActive: true // ❗ unread by default
   },
   {
     id: 3,
@@ -29,7 +29,7 @@ const initialNotifications = [
     action: 'commented on your post',
     daysAgo: '1 days ago',
     image: avatar,
-    isActive: false
+    isActive: true // ❗ unread by default
   }
 ];
 
@@ -56,16 +56,15 @@ const Device = () => {
           <div className="notification-wrapper">
             {notifications.map(notification => (
               <div
-              className="notification-card"
-              key={notification.id}
-              style={{
-                backgroundColor: 'white', // Always white
-                border: notification.isActive ? '2px solid #b30000' : '1px solid #dee2e6',
-                boxShadow: notification.isActive ? '0 0 10px rgba(179, 0, 0, 0.6)' : 'none', // ✨ soft glow
-                transition: 'border 0.3s ease, box-shadow 0.3s ease'
-              }}
-            >
-            
+                className="notification-card"
+                key={notification.id}
+                style={{
+                  backgroundColor: 'white',
+                  border: notification.isActive ? '2px solid #b30000' : '1px solid #dee2e6',
+                  boxShadow: notification.isActive ? '0 0 10px rgba(179, 0, 0, 0.6)' : 'none',
+                  transition: 'border 0.3s ease, box-shadow 0.3s ease'
+                }}
+              >
                 <div className="notification-avatar">
                   <img src={notification.image} alt="user" />
                 </div>
@@ -76,7 +75,7 @@ const Device = () => {
                 <div className="notification-actions">
                   <FaBell
                     className="icon-btn"
-                    title={notification.isActive ? "Unmark as Read" : "Mark as Read"}
+                    title={notification.isActive ? "Mark as Read" : "Mark as Unread"}
                     onClick={() => handleCardBellClick(notification.id)}
                     style={{
                       color: notification.isActive ? 'red' : 'black',
