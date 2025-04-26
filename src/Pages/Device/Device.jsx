@@ -4,6 +4,13 @@ import Topbar from '../../Component/Topbar/Topbar';
 import Footer from '../../Component/Footer/Footer';
 import './Device.css';
 import avatar from '../../assets/avatar.png';
+import image1 from '../../assets/image1.jpeg';
+import image2 from '../../assets/image2.jpeg';
+import image3 from '../../assets/image3.jpeg';
+import image4 from '../../assets/image4.jpeg';
+import image5 from '../../assets/image5.jpeg';
+
+
 import { FaBell, FaTrash } from 'react-icons/fa';
 
 const initialNotifications = [
@@ -12,32 +19,32 @@ const initialNotifications = [
     name: 'Brigid Dawson',
     action: 'followed you',
     daysAgo: '4 days ago',
-    image: avatar,
-    isActive: true // ❗ unread by default
+    image: image2,
+    isActive: true // unread by default
   },
   {
     id: 2,
     name: 'John Dwayer',
     action: 'liked your post',
     daysAgo: '3 days ago',
-    image: avatar,
-    isActive: true // ❗ unread by default
+    image: image3,
+    isActive: true //unread by default
   },
   {
     id: 3,
     name: 'Tim Trollen',
     action: 'commented on your post',
     daysAgo: '1 days ago',
-    image: avatar,
-    isActive: true // ❗ unread by default
+    image: image4,
+    isActive: true //unread by default
   },
   {
     id: 4,
     name: 'Robert Sid',
     action: 'followed you',
     daysAgo: '4 days ago',
-    image: avatar,
-    isActive: true // ❗ unread by default
+    image: image5,
+    isActive: true // unread by default
   },
   {
     id: 5,
@@ -45,7 +52,7 @@ const initialNotifications = [
     action: 'followed you',
     daysAgo: '4 days ago',
     image: avatar,
-    isActive: true // ❗ unread by default
+    isActive: true // unread by default
   }
 ];
 
@@ -58,6 +65,11 @@ const Device = () => {
         ? { ...notification, isActive: !notification.isActive }
         : notification
     );
+    setNotifications(updatedNotifications);
+  };
+
+  const handleDeleteNotification = (id) => {
+    const updatedNotifications = notifications.filter(notification => notification.id !== id);
     setNotifications(updatedNotifications);
   };
 
@@ -98,7 +110,12 @@ const Device = () => {
                       cursor: 'pointer'
                     }}
                   />
-                  <FaTrash className="icon-btn" title="Delete" />
+                  <FaTrash
+                    className="icon-btn"
+                    title="Delete Notification"
+                    onClick={() => handleDeleteNotification(notification.id)}
+                    style={{ cursor: 'pointer' }}
+                  />
                 </div>
               </div>
             ))}
