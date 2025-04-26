@@ -15,15 +15,25 @@ const Topbar = () => {
     navigate('/login'); // Redirect to Login page on Logout
   };
 
+  const handleNotificationClick = () => {
+    navigate('/device'); // Redirect to Notifications page
+  };
+
   return (
     <div className="topbar">
       <div className="topbar-icons">
-        <FaBell className="icon bell" title="Notifications" />
+        <FaBell
+          className="icon bell"
+          title="Notifications"
+          onClick={handleNotificationClick} // <-- Add onClick here
+          style={{ cursor: 'pointer' }} // Make it look clickable
+        />
         <div className="user-container">
           <FaUserCircle
             className="icon user"
             title="User Profile"
-            onClick={handleUserClick} // Add click handler here
+            onClick={handleUserClick}
+            style={{ cursor: 'pointer' }}
           />
           {isLoggedOutVisible && (
             <div className="logout-dropdown">
