@@ -26,9 +26,12 @@
   display: flex;
   flex-direction: column;
   gap: 15px;
-  padding: 10px;
+  padding: 20px;
   background-color: #eee;
   border-radius: 12px;
+  width: 70%;          /* NEW: narrower width */
+  margin: 0 auto;      /* NEW: centered */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* OPTIONAL: subtle shadow */
 }
 
 .notification-card {
@@ -44,6 +47,7 @@
   width: 50px;
   height: 50px;
   border-radius: 50%;
+  object-fit: cover;
 }
 
 .notification-text {
@@ -71,4 +75,11 @@
   font-size: 18px;
   cursor: pointer;
   color: #000;
+}
+
+/* 🔥 NEW: Make it look good on phones/tablets */
+@media (max-width: 768px) {
+  .notification-wrapper {
+    width: 90%; /* Full width on smaller screens */
+  }
 }
