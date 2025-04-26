@@ -30,6 +30,22 @@ const initialNotifications = [
     daysAgo: '1 days ago',
     image: avatar,
     isActive: true // ❗ unread by default
+  },
+  {
+    id: 4,
+    name: 'Robert Sid',
+    action: 'followed you',
+    daysAgo: '4 days ago',
+    image: avatar,
+    isActive: true // ❗ unread by default
+  },
+  {
+    id: 5,
+    name: 'Oliver Cooper',
+    action: 'followed you',
+    daysAgo: '4 days ago',
+    image: avatar,
+    isActive: true // ❗ unread by default
   }
 ];
 
