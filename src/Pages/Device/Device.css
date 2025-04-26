@@ -29,10 +29,11 @@
   padding: 20px;
   background-color: #eee;
   border-radius: 12px;
-  width: 70%;          /* NEW: narrower width */
-  margin: 0 auto;      /* NEW: centered */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* OPTIONAL: subtle shadow */
+  width: 70%;
+  margin: 50px auto 0 auto; /* Top: 40px, sides: auto, bottom: 0 */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
+
 
 .notification-card {
   display: flex;
