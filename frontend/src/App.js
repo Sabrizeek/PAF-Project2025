@@ -1,16 +1,11 @@
 import React, { useEffect } from "react";
 import { Route, Routes, Navigate } from "react-router";
 import { useNavigate } from "react-router-dom";
-// import AddLearningPlan from "./Pages/LearningPlan/AddLearningPlan";
-// import AllLearningPlan from "./Pages/LearningPlan/AllLearningPlan";
-// import UpdateLearningPlan from "./Pages/LearningPlan/UpdateLearningPlan";
+
 import UserLogin from "./Pages/UserManagement/UserLogin";
 import UserRegister from "./Pages/UserManagement/UserRegister";
 import UpdateUserProfile from "./Pages/UserManagement/UpdateUserProfile";
-// import AddAchievements from "./Pages/AchievementsManagement/AddAchievements";
-// import AllAchievements from "./Pages/AchievementsManagement/AllAchievements";
-// import UpdateAchievements from "./Pages/AchievementsManagement/UpdateAchievements";
-// import NotificationsPage from "./Pages/NotificationManagement/NotificationsPage";
+
 import AddNewPost from "./Pages/PostManagement/AddNewPost";
 import AllPost from "./Pages/PostManagement/AllPost";
 import UpdatePost from "./Pages/PostManagement/UpdatePost";
