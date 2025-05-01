@@ -8,7 +8,6 @@ import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfigurat
 import org.springframework.context.annotation.Bean;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
-import org.springframework.scheduling.annotation.EnableScheduling;
 
 import java.util.Properties;
 
@@ -19,7 +18,6 @@ import java.util.Properties;
 				HibernateJpaAutoConfiguration.class
 		}
 )
-@EnableScheduling
 public class BackendApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(BackendApplication.class, args);
@@ -30,8 +28,8 @@ public class BackendApplication {
 		JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
 		mailSender.setHost("smtp.gmail.com");
 		mailSender.setPort(587);
-		mailSender.setUsername("itpmproject25@gmail.com");
-		mailSender.setPassword("lqtj pxkl bail qrsi");
+		mailSender.setUsername("itpmproject25@gmail.com");//email
+		mailSender.setPassword("lqtj pxkl bail qrsi");//password
 
 		Properties props = mailSender.getJavaMailProperties();
 		props.put("mail.transport.protocol", "smtp");
