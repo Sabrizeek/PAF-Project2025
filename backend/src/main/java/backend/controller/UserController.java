@@ -1,11 +1,14 @@
 package backend.controller;
 
 import backend.exception.UserNotFoundException;
-//import backend.model.NotificationModel;
+import backend.model.NotificationModel;
 import backend.model.UserModel;
-//import backend.repository.NotificationRepository;
+import backend.model.LearningPlanModel; // Import LearningPlanModel
+import backend.repository.NotificationRepository;
 import backend.repository.UserRepository;
-//import backend.repository.PostManagementRepository;
+import backend.repository.AchievementsRepository; // Import the repository
+import backend.repository.LearningPlanRepository; // Import the repository
+import backend.repository.PostManagementRepository; // Import the repository
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -35,23 +38,29 @@ public class UserController {
     @Autowired
     private UserRepository userRepository;
 
-//    @Autowired
-//    private NotificationRepository notificationRepository;
-
-//    @Autowired
-//    private PostManagementRepository postManagementRepository;
+    @Autowired
+    private NotificationRepository notificationRepository;
 
     @Autowired
-    private JavaMailSender mailSender;
+    private AchievementsRepository achievementsRepository; // Inject the repository
 
-    private static final String PROFILE_UPLOAD_DIR = "uploads/profile";
+    @Autowired
+    private LearningPlanRepository learningPlanRepository; // Inject the repository
 
-    // Insert
+    @Autowired
+    private PostManagementRepository postManagementRepository; // Inject the repository
+
+    @Autowired
+    private JavaMailSender mailSender; // Add JavaMailSender for sending emails
+
+    private static final String PROFILE_UPLOAD_DIR = "uploads/profile"; // Relative path
+
+    //Insert
     @PostMapping("/user")
     public ResponseEntity<?> newUserModel(@RequestBody UserModel newUserModel) {
-        if (newUserModel.getEmail() == null || newUserModel.getFullname() == null ||
-                newUserModel.getPassword() == null || newUserModel.getBio() == null ||
-                newUserModel.getSkills() == null) {
+        if (newUserModel.getEmail() == null || newUserModel.getFullname() == null || 
+            newUserModel.getPassword() == null || newUserModel.getBio() == null || // Validate bio
+            newUserModel.getSkills() == null) { // Validate skills
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of("message", "Missing required fields."));
         }
 
@@ -67,28 +76,28 @@ public class UserController {
         }
     }
 
-    // User Login
+    //User Login
     @PostMapping("/login")
     public ResponseEntity<Map<String, Object>> login(@RequestBody UserModel loginDetails) {
-        System.out.println("Login attempt for email: " + loginDetails.getEmail());
+        System.out.println("Login attempt for email: " + loginDetails.getEmail()); // Log email for debugging
 
         UserModel user = userRepository.findByEmail(loginDetails.getEmail())
                 .orElseThrow(() -> new UserNotFoundException("Email not found: " + loginDetails.getEmail()));
 
         if (user.getPassword().equals(loginDetails.getPassword())) {
-            System.out.println("Login successful for email: " + loginDetails.getEmail());
+            System.out.println("Login successful for email: " + loginDetails.getEmail()); // Log success
             Map<String, Object> response = new HashMap<>();
             response.put("message", "Login Successful");
             response.put("id", user.getId());
             response.put("fullName", user.getFullname());
             return ResponseEntity.ok(response);
         } else {
-            System.out.println("Invalid password for email: " + loginDetails.getEmail());
+            System.out.println("Invalid password for email: " + loginDetails.getEmail()); // Log invalid password
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("message", "Invalid credentials!"));
         }
     }
 
-    // Display
+    //Display
     @GetMapping("/user")
     List<UserModel> getAllUsers() {
         return userRepository.findAll();
@@ -100,7 +109,7 @@ public class UserController {
                 .orElseThrow(() -> new UserNotFoundException(id));
     }
 
-    // Update
+    //update
     @PutMapping("/user/{id}")
     UserModel updateProfile(@RequestBody UserModel newUserModel, @PathVariable String id) {
         return userRepository.findById(id)
@@ -110,8 +119,16 @@ public class UserController {
                     userModel.setPassword(newUserModel.getPassword());
                     userModel.setPhone(newUserModel.getPhone());
                     userModel.setProfilePicturePath(newUserModel.getProfilePicturePath());
-                    userModel.setSkills(newUserModel.getSkills());
-                    userModel.setBio(newUserModel.getBio());
+                    userModel.setSkills(newUserModel.getSkills()); // Update skills
+                    userModel.setBio(newUserModel.getBio()); // Update bio
+                    
+                    // Update postOwnerName in all related posts
+                    List<LearningPlanModel> userPosts = learningPlanRepository.findByPostOwnerID(id);
+                    userPosts.forEach(post -> {
+                        post.setPostOwnerName(newUserModel.getFullname());
+                        learningPlanRepository.save(post);
+                    });
+                    
                     return userRepository.save(userModel);
                 }).orElseThrow(() -> new UserNotFoundException(id));
     }
@@ -120,16 +137,23 @@ public class UserController {
     public ResponseEntity<?> uploadProfilePicture(@PathVariable String id, @RequestParam("file") MultipartFile file) {
         return userRepository.findById(id).map(user -> {
             try {
+                // Resolve the upload directory as an absolute path
                 File uploadDir = new File(System.getProperty("user.dir"), PROFILE_UPLOAD_DIR);
+
+                // Ensure the upload directory exists
                 if (!uploadDir.exists()) {
                     uploadDir.mkdirs();
                 }
 
+                // Generate a unique file name
                 String extension = StringUtils.getFilenameExtension(file.getOriginalFilename());
                 String uniqueFileName = System.currentTimeMillis() + "_" + UUID.randomUUID() + "." + extension;
+
+                // Save the file to the upload directory
                 Path filePath = uploadDir.toPath().resolve(uniqueFileName);
                 Files.copy(file.getInputStream(), filePath);
 
+                // Save only the file name in the database
                 user.setProfilePicturePath(uniqueFileName);
                 userRepository.save(user);
 
@@ -143,6 +167,7 @@ public class UserController {
     @GetMapping("/uploads/profile/{fileName}")
     public ResponseEntity<Resource> getProfilePicture(@PathVariable String fileName) {
         try {
+            // Resolve the upload directory as an absolute path
             File uploadDir = new File(System.getProperty("user.dir"), PROFILE_UPLOAD_DIR);
             Path filePath = uploadDir.toPath().resolve(fileName);
 
@@ -159,7 +184,7 @@ public class UserController {
         }
     }
 
-    // Delete
+    //delete
     @DeleteMapping("/user/{id}")
     public ResponseEntity<?> deleteProfile(@PathVariable String id) {
         if (!userRepository.existsById(id)) {
@@ -168,8 +193,11 @@ public class UserController {
 
         // Delete user-related data
         userRepository.findById(id).ifPresent(user -> {
-//            postManagementRepository.deleteByUserID(id);
-//            notificationRepository.deleteByUserId(id);
+            // Delete user's posts
+            achievementsRepository.deleteByPostOwnerID(id);
+            learningPlanRepository.deleteByPostOwnerID(id);
+            postManagementRepository.deleteByUserID(id); // Delete user's posts
+            notificationRepository.deleteByUserId(id);
 
             // Remove user from followers and following lists
             userRepository.findAll().forEach(otherUser -> {
@@ -184,7 +212,7 @@ public class UserController {
         return ResponseEntity.ok(Map.of("message", "User account and related data deleted successfully."));
     }
 
-    // Check email
+    // check email
     @GetMapping("/checkEmail")
     public boolean checkEmailExists(@RequestParam String email) {
         return userRepository.existsByEmail(email);
@@ -197,13 +225,14 @@ public class UserController {
             user.getFollowedUsers().add(followUserID);
             userRepository.save(user);
 
+            // Create a notification for the followed user
             String followerFullName = userRepository.findById(userID)
                     .map(follower -> follower.getFullname())
                     .orElse("Someone");
             String message = String.format("%s started following you.", followerFullName);
             String currentDateTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
-//            NotificationModel notification = new NotificationModel(followUserID, message, false, currentDateTime);
-//            notificationRepository.save(notification);
+            NotificationModel notification = new NotificationModel(followUserID, message, false, currentDateTime);
+            notificationRepository.save(notification);
 
             return ResponseEntity.ok(Map.of("message", "User followed successfully"));
         }).orElseThrow(() -> new UserNotFoundException("User not found: " + userID));
@@ -222,7 +251,7 @@ public class UserController {
     @GetMapping("/user/{userID}/followedUsers")
     public List<String> getFollowedUsers(@PathVariable String userID) {
         return userRepository.findById(userID)
-                .map(user -> new ArrayList<>(user.getFollowedUsers()))
+                .map(user -> new ArrayList<>(user.getFollowedUsers())) // Convert Set to List
                 .orElseThrow(() -> new UserNotFoundException("User not found: " + userID));
     }
 
