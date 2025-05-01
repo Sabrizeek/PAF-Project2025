@@ -21,7 +21,7 @@
   .like_btn_con {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 9px;
   }
   
   .likebtn, .unlikebtn, .combtn, .followbtn, .unfollowbtn {
