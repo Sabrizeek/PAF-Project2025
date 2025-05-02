@@ -171,7 +171,7 @@ function LikeComment() {
             className="add_coment_btn"
           />
         </div>
-
+<br/>
         {/* Comment List */}
         <div className="comment-list">
           {comments.map((comment) => (
