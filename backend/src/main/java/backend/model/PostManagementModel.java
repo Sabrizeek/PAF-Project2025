@@ -1,43 +1,37 @@
 package backend.model;
 
-import jakarta.validation.constraints.NotBlank;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
+import java.util.HashMap;
 import java.util.Map;
+import java.util.ArrayList;
 
 @Document(collection = "posts")
 public class PostManagementModel {
-
     @Id
     private String id;
-
-    @NotBlank(message = "userID is required")
     private String userID;
-
-    @NotBlank(message = "Title is required")
     private String title;
-
     private String description;
-    private List<String> media = new ArrayList<>();
-    private Map<String, Boolean> likes = new HashMap<>();
-    private String category;
-
-    // Constructors
-    public PostManagementModel() {}
+    private List<String> media;
+    private Map<String, Boolean> likes = new HashMap<>(); // Map to store user likes
+    private List<Comment> comments = new ArrayList<>(); // List to store comments
+    private String category; // New field for category
 
     public PostManagementModel(String id, String userID, String title, String description, List<String> media) {
         this.id = id;
         this.userID = userID;
         this.title = title;
         this.description = description;
-        this.media = media != null ? media : new ArrayList<>();
+        this.media = media;
     }
 
-    // Getters and Setters
+    public PostManagementModel() {
+
+    }
+
     public String getId() {
         return id;
     }
@@ -75,7 +69,7 @@ public class PostManagementModel {
     }
 
     public void setMedia(List<String> media) {
-        this.media = media != null ? media : new ArrayList<>();
+        this.media = media;
     }
 
     public Map<String, Boolean> getLikes() {
@@ -83,7 +77,15 @@ public class PostManagementModel {
     }
 
     public void setLikes(Map<String, Boolean> likes) {
-        this.likes = likes != null ? likes : new HashMap<>();
+        this.likes = likes;
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
     }
 
     public String getCategory() {
@@ -92,18 +94,5 @@ public class PostManagementModel {
 
     public void setCategory(String category) {
         this.category = category;
-    }
-
-    @Override
-    public String toString() {
-        return "PostManagementModel{" +
-                "id='" + id + '\'' +
-                ", userID='" + userID + '\'' +
-                ", title='" + title + '\'' +
-                ", description='" + description + '\'' +
-                ", media=" + media +
-                ", likes=" + likes +
-                ", category='" + category + '\'' +
-                '}';
     }
 }
