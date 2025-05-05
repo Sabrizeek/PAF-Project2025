@@ -8,6 +8,7 @@ import MyLearningPlan from "./Pages/LearningPlan/MyLearningPlan";
 function App() {
   return (
     <Routes>
+    //paths
       <Route path="/addLearningPlan" element={<AddLearningPlan />} />
       <Route path="/allLearningPlan" element={<AllLearningPlan />} />
       <Route path="/myLearningPlan" element={<MyLearningPlan />} />
