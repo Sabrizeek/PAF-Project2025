@@ -1,19 +1,24 @@
 import React, { useEffect } from "react";
 import { Route, Routes, Navigate } from "react-router";
 import { useNavigate } from "react-router-dom";
-
+import AddLearningPlan from "./Pages/LearningPlan/AddLearningPlan";
+import AllLearningPlan from "./Pages/LearningPlan/AllLearningPlan";
+import UpdateLearningPlan from "./Pages/LearningPlan/UpdateLearningPlan";
 import UserLogin from "./Pages/UserManagement/UserLogin";
 import UserRegister from "./Pages/UserManagement/UserRegister";
 import UpdateUserProfile from "./Pages/UserManagement/UpdateUserProfile";
-
+import AddAchievements from "./Pages/AchievementsManagement/AddAchievements";
+import AllAchievements from "./Pages/AchievementsManagement/AllAchievements";
+import UpdateAchievements from "./Pages/AchievementsManagement/UpdateAchievements";
+import NotificationsPage from "./Pages/NotificationManagement/NotificationsPage";
 import AddNewPost from "./Pages/PostManagement/AddNewPost";
 import AllPost from "./Pages/PostManagement/AllPost";
 import UpdatePost from "./Pages/PostManagement/UpdatePost";
 import UserProfile from "./Pages/UserManagement/UserProfile";
-// import MyAchievements from "./Pages/AchievementsManagement/MyAchievements";
+import MyAchievements from "./Pages/AchievementsManagement/MyAchievements";
 import MyAllPost from "./Pages/PostManagement/MyAllPost";
 import GoogalUserPro from "./Pages/UserManagement/GoogalUserPro";
-// import MyLearningPlan from "./Pages/LearningPlan/MyLearningPlan";
+import MyLearningPlan from "./Pages/LearningPlan/MyLearningPlan";
 
 function ProtectedRoute({ children }) {
   const userID = localStorage.getItem("userID");
@@ -55,7 +60,7 @@ function App() {
           <Route path="/register" element={<UserRegister />} />
 
           {/* Protected Routes */}
-          {/* <Route
+          <Route
             path="/addLearningPlan"
             element={
               <ProtectedRoute>
@@ -86,7 +91,7 @@ function App() {
                 <UpdateLearningPlan />
               </ProtectedRoute>
             }
-          /> */}
+          />
           <Route
             path="/updateUserProfile/:id"
             element={
@@ -111,7 +116,7 @@ function App() {
               </ProtectedRoute>
             }
           />
-          {/* <Route
+          <Route
             path="/addAchievements"
             element={
               <ProtectedRoute>
@@ -150,7 +155,7 @@ function App() {
                 <NotificationsPage />
               </ProtectedRoute>
             }
-          /> */}
+          />
           <Route
             path="/addNewPost"
             element={
