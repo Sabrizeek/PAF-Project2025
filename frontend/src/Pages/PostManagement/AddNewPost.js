@@ -140,7 +140,7 @@ function AddNewPost() {
                       {preview.type.startsWith('video/') ? (
                         <video controls className="media_file_se">
                           <source src={preview.url} type={preview.type} />
-                          
+                          Your browser does not support the video tag.
                         </video>
                       ) : (
                         <img className="media_file_se" src={preview.url} alt={`Media Preview ${index}`} />
