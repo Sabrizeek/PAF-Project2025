@@ -46,7 +46,7 @@ function App() {
         }
         navigate("/allPost");
       } else {
-        alert("Login failed. Missing user information.");
+        alert(".");
       }
     }
   }, [navigate]);
