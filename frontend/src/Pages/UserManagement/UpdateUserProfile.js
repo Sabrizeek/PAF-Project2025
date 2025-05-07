@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { IoMdAdd } from "react-icons/io";
-
+import NavBar from '../../Components/NavBar/NavBar';
 
 function UpdateUserProfile() {
   const { id } = useParams();
@@ -89,7 +89,7 @@ function UpdateUserProfile() {
   return (
     <div>
       <div className='continer'>
-        
+        <NavBar/>
         <div className='continSection'>
           <div className="from_continer">
             <h1 className="update-profile-heading">Update Your Profile</h1>
