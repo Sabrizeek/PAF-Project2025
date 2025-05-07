@@ -6,7 +6,7 @@ import { FaEdit } from "react-icons/fa";
 import { RiDeleteBin6Fill } from "react-icons/ri";
 import { BiSolidLike } from "react-icons/bi";
 import Modal from 'react-modal';
-
+import NavBar from '../../Components/NavBar/NavBar';
 import { IoIosCreate } from "react-icons/io";
 import { MdDelete } from "react-icons/md";
 import { GrUpdate } from "react-icons/gr";
@@ -300,7 +300,7 @@ function MyAllPost() {
   return (
     <div>
       <div className='continer'>
-       
+        <NavBar />
         <div className='continSection'>
           <div className='searchinput'>
             <input
@@ -462,7 +462,7 @@ function MyAllPost() {
                               className='coment_btn'
                               onClick={() => handleDeleteComment(post.id, comment.id)}
                             >
-                              Delete
+                              <MdDelete className='coment_btn' onClick={() => handleDeleteComment(post.id, comment.id)} />
                             </button>
                           )}
                         </div>
