@@ -42,7 +42,7 @@ function App() {
         localStorage.setItem("userID", userID);
         localStorage.setItem("userType", "google");
         if (googleProfileImage) {
-          localStorage.setItem("", googleProfileImage); // Save decoded URL
+          localStorage.setItem("googleProfileImage", googleProfileImage); // Save decoded URL
         }
         navigate("/allPost");
       } else {
