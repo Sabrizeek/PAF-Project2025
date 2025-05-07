@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FaEnvelope, FaPhone, FaTools } from 'react-icons/fa';
 import './UserProfile.css'
-
-
+import Pro from './img/img.png';
+import NavBar from '../../Components/NavBar/NavBar';
 export const fetchUserDetails = async (userId) => {
     try {
         const response = await fetch(`http://localhost:8080/user/${userId}`);
@@ -67,7 +67,7 @@ function GoogalUserPro() {
     return (
         <div>
             <div className='continer'>
-                
+                <NavBar />
                 <div className='continSection'>
                     {userData && userData.id === localStorage.getItem('userID') && (
                         <div className="profile-card">
@@ -77,13 +77,13 @@ function GoogalUserPro() {
                                         ? googleProfileImage
                                         : userProfileImage
                                             ? userProfileImage
-                                            : 'https://www.w3schools.com/howto/img_avatar.png'
+                                            : Pro
                                 }
                                 alt="Profile"
                                 className="profile-image"
                                 onError={(e) => {
                                     e.target.onerror = null;
-                                    e.target.src = 'https://www.w3schools.com/howto/img_avatar.png';
+                                    e.target.src = Pro;
                                 }}
                             />
                             <div className='pro_left_card'>
