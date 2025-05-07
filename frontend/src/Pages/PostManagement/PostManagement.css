@@ -186,7 +186,7 @@
 }
 
 .likebtn, .unlikebtn, .combtn {
-  font-size: 40px;
+  font-size: 24px;
   padding: 8px;
   border-radius: 50%;
   cursor: pointer;
@@ -343,6 +343,98 @@
   transform: rotate(90deg);
 }
 
+/* Media Preview Styles for AddNewPost and UpdatePost */
+.seket_media {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.media_file_se {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.rem_btn {
+  position: relative;
+  top: -20px;
+  right: 10px;
+  background: red;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease;
+}
+
+.rem_btn:hover {
+  transform: scale(1.1);
+}
+
+/* Form Container for AddNewPost and UpdatePost */
+.from_continer {
+  background: white;
+  border-radius: 24px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+  padding: 32px;
+  margin-bottom: 32px;
+}
+
+.Auth_heading {
+  font-size: 24px;
+  font-weight: 700;
+  color: #1a237e;
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.from_data {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.Auth_formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.Auth_label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #37474f;
+}
+
+.Auth_button {
+  background: linear-gradient(45deg, #2196F3, #21CBF3);
+  color: white;
+  padding: 12px;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(33, 150, 243, 0.3);
+}
+
+.Auth_button:hover {
+  transform: translateY(-1px);
+  background: linear-gradient(45deg, #1976d2, #2196F3);
+}
+
+/* Responsive Adjustments */
 @media (max-width: 768px) {
   .continSection {
     padding: 0 12px;
@@ -350,6 +442,21 @@
   
   .post_card {
     border-radius: 16px;
+  }
+
+  .seket_media {
+    gap: 8px;
+  }
+
+  .media_file_se {
+    width: 80px;
+    height: 80px;
+  }
+
+  .rem_btn {
+    width: 18px;
+    height: 18px;
+    font-size: 12px;
   }
 }
 
