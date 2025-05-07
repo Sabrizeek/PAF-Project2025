@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './user.css';
-import GoogalLogo from './img/glogo.png';
-
+import './user.css'
+import GoogalLogo from './img/glogo.png'
 function UserLogin() {
   const [formData, setFormData] = useState({ email: '', password: '' });
   const navigate = useNavigate();
@@ -25,7 +24,7 @@ function UserLogin() {
         const data = await response.json();
         localStorage.setItem('userID', data.id); // Save user ID in local storage
         alert('Login successful!');
-        navigate('/likeComment');
+        navigate('/allPost');
       } else if (response.status === 401) {
         alert('Invalid credentials!');
       } else {
