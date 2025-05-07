@@ -459,12 +459,14 @@ function AllPost() {
                               )}
                             </>
                           )}
-                         {post.userID === loggedInUserID && comment.userID !== loggedInUserID && (
-  <MdDelete
-    className='coment_btn'
-    onClick={() => handleDeleteComment(post.id, comment.id)}
-  />
-)}
+                          {post.userID === loggedInUserID && comment.userID !== loggedInUserID && (
+                            <button
+                              className='coment_btn'
+                              onClick={() => handleDeleteComment(post.id, comment.id)}
+                            >
+                             <MdDelete className='coment_btn' onClick={() => handleDeleteComment(post.id, comment.id)} />
+                            </button>
+                          )}
                         </div>
                       </div>
                     ))}
