@@ -1,32 +1,33 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import NavBar from '../../Components/NavBar/NavBar';
 
 function UpdatePost() {
-  const { id } = useParams(); // Get the post ID from the URL
+  const { id } = useParams();
   const navigate = useNavigate();
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-  const [category, setCategory] = useState(''); // New state for category
-  const [existingMedia, setExistingMedia] = useState([]); // Initialize as an empty array
-  const [newMedia, setNewMedia] = useState([]); // New media files to upload
-  const [loading, setLoading] = useState(true); // Add loading state
+  const [category, setCategory] = useState('');
+  const [existingMedia, setExistingMedia] = useState([]);
+  const [newMedia, setNewMedia] = useState([]);
+  const [newMediaPreviews, setNewMediaPreviews] = useState([]); // For previewing new media
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Fetch the post details
     const fetchPost = async () => {
       try {
         const response = await axios.get(`http://localhost:8080/posts/${id}`);
         const post = response.data;
-        setTitle(post.title || ''); // Ensure title is not undefined
-        setDescription(post.description || ''); // Ensure description is not undefined
-        setCategory(post.category || ''); // Set category
-        setExistingMedia(post.media || []); // Ensure media is an array
-        setLoading(false); // Set loading to false after data is fetched
+        setTitle(post.title || '');
+        setDescription(post.description || '');
+        setCategory(post.category || '');
+        setExistingMedia(post.media || []);
+        setLoading(false);
       } catch (error) {
         console.error('Error fetching post:', error);
         alert('Failed to fetch post details.');
-        setLoading(false); // Set loading to false even if there's an error
+        setLoading(false);
       }
     };
 
@@ -43,7 +44,7 @@ function UpdatePost() {
       await axios.delete(`http://localhost:8080/posts/${id}/media`, {
         data: { mediaUrl },
       });
-      setExistingMedia(existingMedia.filter((url) => url !== mediaUrl)); // Remove from UI
+      setExistingMedia(existingMedia.filter((url) => url !== mediaUrl));
       alert('Media file deleted successfully!');
     } catch (error) {
       console.error('Error deleting media file:', error);
@@ -76,9 +77,12 @@ function UpdatePost() {
     const files = Array.from(e.target.files);
     const maxFileSize = 50 * 1024 * 1024; // 50MB
     const maxImageCount = 3;
+    const maxVideoCount = 1;
 
+    // Count existing media
     let imageCount = existingMedia.filter((url) => !url.endsWith('.mp4')).length;
     let videoCount = existingMedia.filter((url) => url.endsWith('.mp4')).length;
+    const previews = [];
 
     for (const file of files) {
       if (file.size > maxFileSize) {
@@ -89,13 +93,13 @@ function UpdatePost() {
       if (file.type.startsWith('image/')) {
         imageCount++;
         if (imageCount > maxImageCount) {
-          alert('You can upload a maximum of 3 images.');
+          alert('You can upload a maximum of 3 images in total.');
           return;
         }
       } else if (file.type === 'video/mp4') {
         videoCount++;
-        if (videoCount > 1) {
-          alert('You can upload only 1 video.');
+        if (videoCount > maxVideoCount) {
+          alert('You can upload only 1 video in total.');
           return;
         }
 
@@ -109,9 +113,13 @@ function UpdatePost() {
         alert(`Unsupported file type: ${file.type}`);
         return;
       }
+
+      // Add preview for new media
+      previews.push({ type: file.type, url: URL.createObjectURL(file) });
     }
 
     setNewMedia(files);
+    setNewMediaPreviews(previews);
   };
 
   const handleSubmit = async (e) => {
@@ -119,7 +127,7 @@ function UpdatePost() {
     const formData = new FormData();
     formData.append('title', title);
     formData.append('description', description);
-    formData.append('category', category); // Include category in the update
+    formData.append('category', category);
     newMedia.forEach((file) => formData.append('newMediaFiles', file));
 
     try {
@@ -135,17 +143,17 @@ function UpdatePost() {
   };
 
   if (loading) {
-    return <div>Loading...</div>; // Display a loading message while fetching data
+    return <div>Loading...</div>;
   }
 
   return (
     <div>
-      <div className='continer'>
-       
-        <div className='continSection'>
+      <div className="continer">
+        <NavBar />
+        <div className="continSection">
           <div className="from_continer">
             <p className="Auth_heading">Update Post</p>
-            <form onSubmit={handleSubmit} className='from_data'>
+            <form onSubmit={handleSubmit} className="from_data">
               <div className="Auth_formGroup">
                 <label className="Auth_label">Title</label>
                 <input
@@ -184,25 +192,33 @@ function UpdatePost() {
                 </select>
               </div>
               <div className="Auth_formGroup">
-                <label className="Auth_label">Media</label>
-                <div className='seket_media'>
+                <label className="Auth_label">Media (up to 3 images and 1 video)</label>
+                <div className="seket_media">
                   {existingMedia.map((mediaUrl, index) => (
                     <div key={index}>
                       {mediaUrl.endsWith('.mp4') ? (
-                        <video controls className='media_file_se'>
+                        <video controls className="media_file_se">
                           <source src={`http://localhost:8080${mediaUrl}`} type="video/mp4" />
                           Your browser does not support the video tag.
                         </video>
                       ) : (
-                        <img className='media_file_se' src={`http://localhost:8080${mediaUrl}`} alt={`Media ${index}`} />
+                        <img className="media_file_se" src={`http://localhost:8080${mediaUrl}`} alt={`Media ${index}`} />
                       )}
-                      <button
-                      className='rem_btn'
-                        onClick={() => handleDeleteMedia(mediaUrl)}
-
-                      >
+                      <button className="rem_btn" onClick={() => handleDeleteMedia(mediaUrl)}>
                         X
                       </button>
+                    </div>
+                  ))}
+                  {newMediaPreviews.map((preview, index) => (
+                    <div key={`new-${index}`}>
+                      {preview.type.startsWith('video/') ? (
+                        <video controls className="media_file_se">
+                          <source src={preview.url} type={preview.type} />
+                          Your browser does not support the video tag.
+                        </video>
+                      ) : (
+                        <img className="media_file_se" src={preview.url} alt={`New Media Preview ${index}`} />
+                      )}
                     </div>
                   ))}
                 </div>
