@@ -464,7 +464,7 @@ function AllPost() {
                               className='coment_btn'
                               onClick={() => handleDeleteComment(post.id, comment.id)}
                             >
-                             <MdDelete className='coment_btn' onClick={() => handleDeleteComment(post.id, comment.id)} />
+                            
                             </button>
                           )}
                         </div>
