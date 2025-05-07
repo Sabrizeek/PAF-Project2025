@@ -217,7 +217,7 @@ function UpdatePost() {
                           Your browser does not support the video tag.
                         </video>
                       ) : (
-                        <img className="media_file_se" src={preview.url} alt={`New Media Preview ${index}`} />
+                      
                       )}
                     </div>
                   ))}
