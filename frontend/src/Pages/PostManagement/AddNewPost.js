@@ -1,32 +1,44 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import NavBar from '../../Components/NavBar/NavBar';
 
 function AddNewPost() {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [media, setMedia] = useState([]);
-  const [mediaPreviews, setMediaPreviews] = useState([]); // For storing media preview objects
-  const [categories, setCategories] = useState(''); // New state for categories
+  const [mediaPreviews, setMediaPreviews] = useState([]);
+  const [categories, setCategories] = useState('');
   const userID = localStorage.getItem('userID');
 
   const handleMediaChange = (e) => {
     const files = Array.from(e.target.files);
     const maxFileSize = 50 * 1024 * 1024; // 50MB
+    const maxImageCount = 3;
+    const maxVideoCount = 1;
 
     let imageCount = 0;
     let videoCount = 0;
     const previews = [];
 
+    // Validate files
     for (const file of files) {
       if (file.size > maxFileSize) {
         alert(`File ${file.name} exceeds the maximum size of 50MB.`);
-        window.location.reload();
+        return;
       }
 
       if (file.type.startsWith('image/')) {
         imageCount++;
+        if (imageCount > maxImageCount) {
+          alert('You can upload a maximum of 3 images.');
+          return;
+        }
       } else if (file.type === 'video/mp4') {
         videoCount++;
+        if (videoCount > maxVideoCount) {
+          alert('You can upload only 1 video.');
+          return;
+        }
 
         // Validate video duration
         const video = document.createElement('video');
@@ -42,25 +54,15 @@ function AddNewPost() {
         };
       } else {
         alert(`Unsupported file type: ${file.type}`);
-        window.location.reload();
+        return;
       }
 
-      // Add file preview object with type and URL
+      // Add file preview
       previews.push({ type: file.type, url: URL.createObjectURL(file) });
     }
 
-    if (imageCount > 3) {
-      alert('You can upload a maximum of 3 images.');
-      window.location.reload();
-    }
-
-    if (videoCount > 1) {
-      alert('You can upload only 1 video.');
-      window.location.reload();
-    }
-
     setMedia(files);
-    setMediaPreviews(previews); // Set preview objects
+    setMediaPreviews(previews);
   };
 
   const handleSubmit = async (e) => {
@@ -69,8 +71,8 @@ function AddNewPost() {
     formData.append('userID', userID);
     formData.append('title', title);
     formData.append('description', description);
-    formData.append('category', categories); // Include category in form data
-    media.forEach((file, index) => formData.append(`mediaFiles`, file));
+    formData.append('category', categories);
+    media.forEach((file) => formData.append('mediaFiles', file));
 
     try {
       const response = await axios.post('http://localhost:8080/posts', formData, {
@@ -87,12 +89,12 @@ function AddNewPost() {
 
   return (
     <div>
-      <div className='continer'>
-       
-        <div className='continSection'>
+      <div className="continer">
+        <NavBar />
+        <div className="continSection">
           <div className="from_continer">
             <p className="Auth_heading">Create New Post</p>
-            <form onSubmit={handleSubmit} className='from_data'>
+            <form onSubmit={handleSubmit} className="from_data">
               <div className="Auth_formGroup">
                 <label className="Auth_label">Title</label>
                 <input
@@ -131,17 +133,17 @@ function AddNewPost() {
                 </select>
               </div>
               <div className="Auth_formGroup">
-                <label className="Auth_label">Media</label>
-                <div className='seket_media'>
+                <label className="Auth_label">Media (up to 3 images and 1 video)</label>
+                <div className="seket_media">
                   {mediaPreviews.map((preview, index) => (
                     <div key={index}>
                       {preview.type.startsWith('video/') ? (
-                        <video controls className='media_file_se'>
+                        <video controls className="media_file_se">
                           <source src={preview.url} type={preview.type} />
                           Your browser does not support the video tag.
                         </video>
                       ) : (
-                        <img className='media_file_se' src={preview.url} alt={`Media Preview ${index}`} />
+                        <img className="media_file_se" src={preview.url} alt={`Media Preview ${index}`} />
                       )}
                     </div>
                   ))}
