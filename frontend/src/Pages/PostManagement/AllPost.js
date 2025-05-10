@@ -460,12 +460,12 @@ function AllPost() {
                             </>
                           )}
                           {post.userID === loggedInUserID && comment.userID !== loggedInUserID && (
-                            <button
-                              className='coment_btn'
-                              onClick={() => handleDeleteComment(post.id, comment.id)}
-                            >
-                             <MdDelete className='coment_btn' onClick={() => handleDeleteComment(post.id, comment.id)} />
-                            </button>
+                            <>
+                            <GrUpdate className='coment_btn' onClick={() =>
+                              setEditingComment({ id: comment.id, content: comment.content })
+                            } />
+                            <MdDelete className='coment_btn' onClick={() => handleDeleteComment(post.id, comment.id)} />
+                          </>
                           )}
                         </div>
                       </div>
